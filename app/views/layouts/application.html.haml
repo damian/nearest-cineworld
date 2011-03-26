@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    = csrf_meta_tag
+    %title= yield(:title)
+    = stylesheet_link_tag :all
+  %body
+    %header
+      .container_12
+        %h1 Your nearest cineworld is
+    #content.container_12
+      = yield
+    = javascript_include_tag :defaults
+    
+

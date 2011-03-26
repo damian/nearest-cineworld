@@ -1,0 +1,27 @@
+%h2= @cinema.name
+%p= @cinema.to_address
+
+%ul#date-switcher
+  %li
+    %a.active{:href => '#today'} Today
+  %li
+    %a{:href => '#tomorrow'} Tomorrow
+#today
+  - @todays_films.each do |film|
+    = div_for film do
+      = link_to(image_tag(film.poster_url, :class => 'poster'), film_path(film))
+      .film-info
+        %h3= link_to film.title, film_path(film)
+        %p= film.classification
+        %p= list_performances(film.performances.for_cinema(@cinema).today)
+      .clear
+
+#tomorrow.hidden
+  - @tomorrows_films.each do |film|
+    = div_for film do
+      = link_to(image_tag(film.poster_url, :class => 'poster'), film_path(film))
+      .film-info
+        %h3= link_to film.title, film_path(film)
+        %p= film.classification
+        %p= list_performances(film.performances.for_cinema(@cinema).tomorrow, false)
+      .clear
