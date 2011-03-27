@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(:version => 20110325121922) do
 
   create_table "cinemas", :force => true do |t|
+    t.integer  "cinema_id"
     t.string   "name"
     t.string   "cinema_url"
     t.text     "address"
@@ -20,10 +21,13 @@ ActiveRecord::Schema.define(:version => 20110325121922) do
     t.string   "telephone"
     t.float    "lat"
     t.float    "lng"
+    t.string   "cached_slug"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cached_slug"
   end
+
+  add_index "cinemas", ["cached_slug"], :name => "index_cinemas_on_cached_slug", :unique => true
+  add_index "cinemas", ["cinema_id"], :name => "index_cinemas_on_cinema_id", :unique => true
 
   create_table "films", :force => true do |t|
     t.integer  "edi"

@@ -1,4 +1,6 @@
 class Cinema < ActiveRecord::Base
+  set_primary_key :cinema_id
+
   # Relationships
   has_many :performances
   has_many :films, :through => :performances

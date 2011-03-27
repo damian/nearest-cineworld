@@ -2,7 +2,11 @@ module PerformancesHelper
 
   def list_performances(performances, today = true)
     unless today
-      return performances.map { |t| content_tag(:span, t.time, :class => 'performance available') }.join(' ').html_safe
+      return performances.map do |performance|
+        link_to performance.booking_url do
+          content_tag(:span, performance.time, :class => 'performance available')
+        end
+      end.join(' ').html_safe
     end
     now = Time.now
     performances.map do |performance|

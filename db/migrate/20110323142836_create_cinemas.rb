@@ -4,7 +4,7 @@ class CreateCinemas < ActiveRecord::Migration
       t.integer :edi
       t.string :title, :poster_url, :film_url, :still_url, :advisory
       t.string :classification, :length => 10
-      t.string :cached_slug, :string
+      t.string :cached_slug
       t.timestamps
     end
     add_index :films, :cached_slug, :unique => true
