@@ -1,5 +1,3 @@
-.film
-  = image_tag @film.poster_url, :class => 'poster'
-  .film-info
-    %h3= @film.title
-  .clear
+= image_tag @film.posters['cover'], :class => 'poster'
+%h3= @film.title
+%p= @film.overview

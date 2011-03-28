@@ -1,1 +1,6 @@
-= debug @cinemas
+- if @cinema.present?
+  = div_for @cinema do
+    %h3= link_to @cinema.name, cinema_path(@cinema)
+    %p= @cinema.to_address
+    %p= @cinema.distance
+

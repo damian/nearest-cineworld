@@ -1,27 +1,21 @@
-%h2= @cinema.name
+%h2{:datahref => cinema_path(@cinema) }= @cinema.name
 %p= @cinema.to_address
 
-%ul#date-switcher
-  %li
-    %a.active{:href => '#today'} Today
-  %li
-    %a{:href => '#tomorrow'} Tomorrow
 #today
-  - @todays_films.each do |film|
-    = div_for film do
-      = link_to(image_tag(film.poster_url, :class => 'poster'), film_path(film))
-      .film-info
-        %h3= link_to film.title, film_path(film)
-        %p= film.classification
-        %p= list_performances(film.performances.for_cinema(@cinema).today)
-      .clear
+  %ul
+    - @todays_films.each_with_index do |film, index|
+      = content_tag_for(:li, film) do
+        = image_tag(film.posters.blank? ? 'sourcecode.jpg' : film.posters['cover'], :class => 'poster')
+        .film-info
+          .film-info-inner
+            %h3= link_to film.title, film_path(film)
+            %p= film.classification
 
-#tomorrow.hidden
-  - @tomorrows_films.each do |film|
-    = div_for film do
-      = link_to(image_tag(film.poster_url, :class => 'poster'), film_path(film))
-      .film-info
-        %h3= link_to film.title, film_path(film)
-        %p= film.classification
-        %p= list_performances(film.performances.for_cinema(@cinema).tomorrow, false)
-      .clear
+            %h4 Today
+            %p.performances= list_performances(film.performances.for_cinema(@cinema).today)
+
+            %h4 Tomorrow
+            %p.performances= list_performances(film.performances.for_cinema(@cinema).tomorrow, false)
+        .clear
+      - if ((index + 1) % 4 == 0)
+        %br
