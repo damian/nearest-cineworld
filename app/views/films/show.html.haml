@@ -7,4 +7,4 @@
   %ul
     %li= imdb_link(@film)
     %li= tmdb_link(@film)
-    %li= "Released: #{@film.release_date.to_s}"
+    %li= "Released: #{@film.release_date.to_s(:release_date_with_year)}"

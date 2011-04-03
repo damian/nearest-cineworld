@@ -3,11 +3,12 @@
   - @films.each_with_index do |film, index|
     %li.grid_3
       = div_for(film) do
-        = image_tag(film.posters.blank? ? 'placeholder.jpg' : film.posters['cover'], :class => 'poster')
+        = film_poster film
         .film-info
           .film-info-inner
             = classification(film)
             %h3= link_to film.title, film_path(film), :class => 'film-title'
+            %p= truncate(film.overview, :length => 140) if film.overview.present?
         .clear
     - if ((index + 1) % 4 == 0)
       %li.clear

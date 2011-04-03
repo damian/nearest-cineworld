@@ -1,7 +1,11 @@
 module FilmsHelper
 
   def film_poster(film)
-    image_tag film.posters.blank? ? 'placeholder.jpg' : film.posters['cover'], :class => 'poster'
+    if film.posters.blank?
+      image_tag 'movie-placeholder.jpg', :class => 'poster placeholder'
+    else
+      image_tag film.posters['cover'], :class => 'poster'
+    end
   end
 
   def classification(film)
