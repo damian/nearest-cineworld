@@ -189,11 +189,6 @@ h4 { font-size: 15px; }
 
 
 /* --- Footer --- */
-/* footer { */
-/*   padding: 40px 0; */
-/*   margin-top: 40px; */
-/*   border-top: 1px solid #D8D8D8; */
-/* } */
 
 /* --- Header --- */
 header {
@@ -216,10 +211,12 @@ header h2 {
 }
 
 .hidden { display: none; }
-ul { margin-left: 0; }
-ul li {
-  display: inline;
-  list-style: none;
+ul {
+  margin: 20px 0 20px 20px;
+}
+
+#films {
+  margin: 0;
 }
 
 #content {
@@ -252,12 +249,8 @@ ul li {
 
 #geo .loading {
   background-color: #FFE668;
-  color: #fff;
+  /* color: #fff; */
   padding: 5px;
-}
-
-#geo .success {
-  background-color: #0C0;
 }
 
 .poster {
@@ -271,6 +264,10 @@ ul li {
 .cinema {
   padding: 10px 0;
   border-bottom: 2px dashed #D5D5D5;
+}
+
+.showings {
+  margin-bottom: 40px;
 }
 
 #films .grid_3 {

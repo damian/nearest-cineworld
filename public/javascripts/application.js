@@ -29,8 +29,7 @@ function success(position) {
       var cinema_header = $('#cinema-address', content).find('h2');
       var cinema_path = cinema_header.attr('data-href');
       var cinema_name = cinema_header.text();
-      console.log(spinner.text());
-      loading_text.text(cinema_name.replace('Cineworld', '')).addClass('success');
+      loading_text.hide();
       history.pushState({ path: window.location.path }, '', cinema_path);
       plot_map();
     }

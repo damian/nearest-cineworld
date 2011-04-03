@@ -6,6 +6,7 @@
   #map.grid_5.omega
   .clear
 
+%h2.showings= "Showings for Cineworld #{@cinema.name}"
 %ul#films
   - @todays_films.each_with_index do |film, index|
     %li.grid_3
@@ -24,3 +25,4 @@
         .clear
     - if ((index + 1) % 4 == 0)
       %li.clear
+.clear
