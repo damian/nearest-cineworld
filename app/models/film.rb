@@ -15,7 +15,7 @@ class Film < ActiveRecord::Base
 
   # Scopes
   default_scope order('title asc')
-  scope :grouped, group('films.edi')
+  scope :grouped, group('films.edi, films.id')
   scope :performances_for_date, lambda { |date| where('performances.date = ?', date) }
   scope :today, performances_for_date(Date.today)
   scope :tomorrow, performances_for_date(Date.today + 1)
