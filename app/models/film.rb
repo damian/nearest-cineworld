@@ -11,6 +11,7 @@ class Film < ActiveRecord::Base
 
   # Validations
   validates_uniqueness_of :title
+  validates_uniqueness_of :edi
 
   # Scopes
   default_scope order('title asc')
@@ -26,20 +27,32 @@ class Film < ActiveRecord::Base
 
   def store_tmdb_info
     tmdb = TMDBParty::Base.new(Settings.tmdb_api_key)
-    film = tmdb.search(title).first[0]
+    film_title = title.gsub(/(2|3)D \-? /, '').strip
+    film = tmdb.search(film_title).first
     posters, backdrops = {}, {}
-    film.posters.each do |poster|
-      posters[poster.image.size] = poster.image.url
-    end 
 
-    film.backdrops.each do |backdrop|
-      backdrops[backdrop.image.size] = backdrop.image.url
+    return if film.blank?
+
+    poster = film.posters[0]
+    backdrop = film.backdrops[0]
+
+    unless poster.blank?
+      poster.sizes.each do |size|
+        posters[size.to_s] = poster.send("#{size}_url".to_sym)
+      end
     end
+
+    unless backdrop.blank?
+      backdrop.sizes.each do |size|
+        backdrops[size.to_s] = backdrop.send("#{size}_url".to_sym)
+      end
+    end
+
     self.update_attributes(
       :imdb_id => film.imdb_id,
       :tmdb_url => film.url,
       :overview => film.overview,
-      :released => film.released,
+      :release_date => film.released,
       :posters => posters,
       :backdrops => backdrops,
       :rating => film.attributes['rating'],

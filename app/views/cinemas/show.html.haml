@@ -1,15 +1,20 @@
-%h2{:datahref => cinema_path(@cinema) }= @cinema.name
-%p= @cinema.to_address
+= page_title("Cineworld #{@cinema.name}")
+#cinema-address
+  .grid_7.alpha
+    %h2{:data => { :href => cinema_path(@cinema), :latitude => @cinema.lat, :longitude => @cinema.lng } }= "Cineworld #{@cinema.name}"
+    %p= @cinema.to_address
+  #map.grid_5.omega
+  .clear
 
-#today
-  %ul
-    - @todays_films.each_with_index do |film, index|
-      = content_tag_for(:li, film) do
-        = image_tag(film.posters.blank? ? 'sourcecode.jpg' : film.posters['cover'], :class => 'poster')
+%ul#films
+  - @todays_films.each_with_index do |film, index|
+    %li.grid_3
+      = div_for(film) do
+        = film_poster(film)
         .film-info
           .film-info-inner
-            %h3= link_to film.title, film_path(film)
-            %p= film.classification
+            = classification(film)
+            %h3= link_to film.title, film_path(film), :class => 'film-title'
 
             %h4 Today
             %p.performances= list_performances(film.performances.for_cinema(@cinema).today)
@@ -17,5 +22,5 @@
             %h4 Tomorrow
             %p.performances= list_performances(film.performances.for_cinema(@cinema).tomorrow, false)
         .clear
-      - if ((index + 1) % 4 == 0)
-        %br
+    - if ((index + 1) % 4 == 0)
+      %li.clear

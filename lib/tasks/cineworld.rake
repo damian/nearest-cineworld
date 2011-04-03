@@ -38,12 +38,15 @@ namespace :cineworld do
   desc "Get performances"
   task :update_performances => :environment do
     date = Date.today
+    today = date.strftime('%Y%m%d')
     tomorrow = (date + 1).strftime('%Y%m%d')
     cineworld = Cineworld::API.new(Settings.cineworld_api_key)
     Film.all.each do |film|
       Cinema.all.each do |cinema|
-        cineworld.performances(:date => tomorrow, :cinema => cinema.id, :film => film.edi)['performances'].each do |performance|
-          Performance.create(:time => performance['time'], :available => performance['available'], :performance_type => performance['type'], :ad => performance['ad'], :subtitled => performance['subtitled'], :booking_url => performance['booking_url'], :cinema_id => cinema.id, :film_id => film.edi, :date => tomorrow)
+        [today, tomorrow].each do |date|
+          cineworld.performances(:date => date, :cinema => cinema.id, :film => film.edi)['performances'].each do |performance|
+            Performance.create(:time => performance['time'], :available => performance['available'], :performance_type => performance['type'], :ad => performance['ad'], :subtitled => performance['subtitled'], :booking_url => performance['booking_url'], :cinema_id => cinema.id, :film_id => film.edi, :date => date)
+          end
         end
       end
     end

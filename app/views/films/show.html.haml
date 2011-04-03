@@ -1,3 +1,10 @@
-= image_tag @film.posters['cover'], :class => 'poster'
-%h3= @film.title
-%p= @film.overview
+= page_title(@film.title)
+.grid_3
+  = film_poster(@film)
+.grid_9
+  %h3= @film.title
+  %p= @film.overview
+  %ul
+    %li= imdb_link(@film)
+    %li= tmdb_link(@film)
+    %li= "Released: #{@film.release_date.to_s}"

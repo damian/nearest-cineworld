@@ -6,6 +6,6 @@ NearestCineworld::Application.routes.draw do
       get :search
     end
   end
-  root :to => "cinemas#index"
+  root :to => "cinemas#search"
 
 end

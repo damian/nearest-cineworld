@@ -11,7 +11,7 @@ class Cinema < ActiveRecord::Base
 
   # Geocoder gem
   geocoded_by :geocode_address, :latitude => :lat, :longitude => :lng
-  after_validation :geocode
+  after_validation_on_create :geocode
 
   # Scopes
   default_scope order('name asc')
