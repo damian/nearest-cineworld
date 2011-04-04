@@ -203,6 +203,11 @@ footer {
   font-weight: bold;
 }
 
+footer ul { margin: 0; }
+footer li {
+  list-style: none;
+}
+
 /* --- Header --- */
 header {
   padding-top: 40px;
