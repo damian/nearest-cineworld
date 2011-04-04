@@ -2,7 +2,11 @@
 %html.no-js
   %head
     = csrf_meta_tag
-    %title= yield(:title)
+    %title
+      - if params[:action] == 'search'
+        Finding cineworld cinemas and cineworld show times has never been easier
+      - else
+        = yield(:title)
     = javascript_include_tag 'modernizr-1.7.min'
     = stylesheet_link_tag :all
   %body{ :class => body_classes, :id => body_ids }
@@ -11,14 +15,13 @@
         %hgroup
           %h1
             = link_to "Cineworld", root_path
-          %h2 Finding cineworld cinemas and time has never been easier
+          %h2 Finding cineworld cinemas and cineworld show times has never been easier
         .clear
       #content
         %noscript
           %h3 This site requires the use of JavaScript to function. Sorry :-(
         #spinner
         - if params[:action] == 'search'
-          = page_title
           #geo
             %h3><
               Your nearest Cineworld is: 
