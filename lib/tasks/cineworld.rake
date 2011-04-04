@@ -50,7 +50,9 @@ namespace :cineworld do
         end
       end
     end
-
   end
+
+  desc "Update films and performances"
+  task :films_and_performances => [:update_films, :update_performances]
 end
 
