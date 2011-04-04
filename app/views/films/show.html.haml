@@ -1,10 +1,36 @@
 = page_title(@film.title)
 .grid_3
   = film_poster(@film)
-.grid_9
-  %h3= @film.title
-  %p= @film.overview
+  .clear
   %ul
+    %li Classification - #{@film.classification}
+    %li= "Released: #{@film.release_date.to_s(:release_date_with_year)}" if @film.release_date.present?
+    %li= genres(@film)
+
+  %ul
+    %li= home_link(@film)
     %li= imdb_link(@film)
     %li= tmdb_link(@film)
-    %li= "Released: #{@film.release_date.to_s(:release_date_with_year)}" if @film.release_date.present?
+  
+.grid_9
+  %h2= @film.title
+  %p#overview= @film.overview
+  .clear
+
+  - if @film.trailer_url.present?
+    %h3 Trailer
+    = youtube_embed(@film)
+    .clear
+
+  - if @film.cast.present?
+    %h3 Cast
+    %ul#cast
+      - @film.cast.each_with_index do |value, index|
+        - unless value['profile'].blank?
+          %li.grid_2
+            = link_to image_tag(value['profile'], :class => 'cast'), value['url']
+            %p= value['name']
+          - if ((index + 1) % 4 == 0)
+            %li.clear
+    .clear
+.clear

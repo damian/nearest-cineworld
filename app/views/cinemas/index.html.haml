@@ -1,5 +1,5 @@
 = page_title
 - @cinemas.each do |cinema|
   = div_for cinema do
-    %h3= link_to cinema.name, cinema_path(cinema)
+    %h3= link_to "Cineworld #{cinema.name}", cinema_path(cinema)
     %p= cinema.to_address

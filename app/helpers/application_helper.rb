@@ -6,4 +6,12 @@ module ApplicationHelper
     content_for(:title, title)
   end
 
+  def body_classes
+    ["#{params[:controller]}-controller", "#{params[:action]}-action"].join(' ')
+  end
+
+  def body_ids
+    ["#{params[:controller]}-controller", "#{params[:action]}-action"].join('-')
+  end
+
 end

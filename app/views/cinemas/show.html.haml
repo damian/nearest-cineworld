@@ -1,4 +1,4 @@
-= page_title("Cineworld #{@cinema.name}")
+= page_title("Cineworld #{@cinema.name} | #{@cinema.name} Cineworld")
 #cinema-address
   .grid_7.alpha
     %h2{:data => { :href => cinema_path(@cinema), :latitude => @cinema.lat, :longitude => @cinema.lng } }= "Cineworld #{@cinema.name}"
@@ -8,21 +8,5 @@
 
 %h2.showings= "Showings for Cineworld #{@cinema.name}"
 %ul#films
-  - @todays_films.each_with_index do |film, index|
-    %li.grid_3
-      = div_for(film) do
-        = film_poster(film)
-        .film-info
-          .film-info-inner
-            = classification(film)
-            %h3= link_to film.title, film_path(film), :class => 'film-title'
-
-            %h4 Today
-            %p.performances= list_performances(film.performances.for_cinema(@cinema).today)
-
-            %h4 Tomorrow
-            %p.performances= list_performances(film.performances.for_cinema(@cinema).tomorrow, false)
-        .clear
-    - if ((index + 1) % 4 == 0)
-      %li.clear
+  = render :partial => 'film', :collection => @todays_films
 .clear

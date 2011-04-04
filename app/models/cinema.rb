@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: cinemas
+#
+#  id          :integer(4)      not null
+#  cinema_id   :integer(4)      primary key
+#  name        :string(255)
+#  cinema_url  :string(255)
+#  address     :text
+#  postcode    :string(255)
+#  telephone   :string(255)
+#  lat         :float
+#  lng         :float
+#  cached_slug :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Cinema < ActiveRecord::Base
   set_primary_key :cinema_id
 

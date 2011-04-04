@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: performances
+#
+#  id               :integer(4)      not null, primary key
+#  time             :string(255)
+#  performance_type :string(255)
+#  booking_url      :string(255)
+#  available        :boolean(1)
+#  ad               :boolean(1)
+#  subtitled        :boolean(1)
+#  date             :datetime
+#  film_id          :integer(4)
+#  cinema_id        :integer(4)
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Performance < ActiveRecord::Base
   # Relationships
   belongs_to :film, :foreign_key => 'film_id'

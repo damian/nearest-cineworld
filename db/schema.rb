@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110328104328) do
+ActiveRecord::Schema.define(:version => 20110404105351) do
 
   create_table "cinemas", :force => true do |t|
     t.integer  "cinema_id"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(:version => 20110328104328) do
     t.string   "advisory"
     t.string   "classification"
     t.string   "cached_slug"
-    t.string   "string"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "imdb_id"
@@ -50,6 +49,10 @@ ActiveRecord::Schema.define(:version => 20110328104328) do
     t.integer  "popularity"
     t.integer  "votes"
     t.float    "rating"
+    t.text     "cast"
+    t.text     "genres"
+    t.string   "trailer_url"
+    t.string   "homepage_url"
   end
 
   add_index "films", ["cached_slug"], :name => "index_films_on_cached_slug", :unique => true
@@ -80,18 +83,5 @@ ActiveRecord::Schema.define(:version => 20110328104328) do
 
   add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
-
-  create_table "tmdbs", :force => true do |t|
-    t.integer "film_id"
-    t.string  "imdb_id"
-    t.string  "url"
-    t.text    "overview"
-    t.text    "posters"
-    t.text    "backdrops"
-    t.date    "released"
-    t.integer "popularity"
-    t.integer "votes"
-    t.float   "rating"
-  end
 
 end

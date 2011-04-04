@@ -1,0 +1,16 @@
+%li.grid_3
+  = div_for(film) do
+    = film_poster(film)
+    .film-info
+      .film-info-inner
+        = classification(film)
+        %h3= link_to film.title, film_path(film), :class => 'film-title'
+
+        %h4 Today
+        %p.performances= list_performances(film.performances.for_cinema(@cinema).today)
+
+        %h4 Tomorrow
+        %p.performances= list_performances(film.performances.for_cinema(@cinema).tomorrow, false)
+    .clear
+- if ((film_counter + 1) % 4 == 0)
+  %li.clear

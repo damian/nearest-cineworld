@@ -161,6 +161,15 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 a, a:active, a:visited { text-decoration: none; /* color: #C30; */ }
 
 /* --------------- I START HERE ----------- */
+.no-js #content * {
+  display: none;
+}
+
+.no-js #content noscript,
+.no-js #content noscript * {
+  display: block;
+}
+
 body {
   background-color: #F4F4F4;
   color: #696C74;
@@ -194,6 +203,7 @@ h4 { font-size: 15px; }
 header {
   padding-top: 40px;
   line-height: 35px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 h1 {
@@ -215,6 +225,7 @@ ul {
   margin: 20px 0 20px 20px;
 }
 
+#cast,
 #films {
   margin: 0;
 }
@@ -235,7 +246,7 @@ ul {
   left: 50%;
   margin-left: -16px;
   margin-top: -16px;
-  background: transparent url(../images/loading.gif) 0 0 no-repeat;
+  background: transparent url(../images/ajax-loader.gif) 0 0 no-repeat;
   width: 32px;
   height: 32px;
   display: none;
@@ -253,6 +264,7 @@ ul {
   padding: 5px;
 }
 
+.cast,
 .poster {
   float: left;
   padding: 1px;
@@ -261,9 +273,21 @@ ul {
   background-color: white;
 }
 
+.cast { float: none; }
+#cast li { margin-bottom: 20px; }
+
 .cinema {
   padding: 10px 0;
   border-bottom: 2px dashed #D5D5D5;
+}
+
+#films-controller-show-action #content {
+  font-weight: bolder;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+#films-controller-show-action h3 {
+  margin-top: 40px;
 }
 
 .showings {

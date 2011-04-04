@@ -1,10 +1,11 @@
 !!!
-%html
+%html.no-js
   %head
     = csrf_meta_tag
     %title= yield(:title)
+    = javascript_include_tag 'modernizr-1.7.min'
     = stylesheet_link_tag :all
-  %body
+  %body{ :class => body_classes, :id => body_ids }
     .container_12
       %header
         %hgroup
@@ -13,8 +14,11 @@
           %h2 Finding cineworld cinemas and time has never been easier
         .clear
       #content
+        %noscript
+          %h3 This site requires the use of JavaScript to function. Sorry :-(
         #spinner
         - if params[:action] == 'search'
+          = page_title
           #geo
             %h3><
               Your nearest Cineworld is: 
