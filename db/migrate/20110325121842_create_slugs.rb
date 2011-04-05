@@ -5,6 +5,7 @@ class CreateSlugs < ActiveRecord::Migration
       t.integer :sluggable_id
       t.integer :sequence, :null => false, :default => 1
       t.string :sluggable_type, :limit => 40
+      t.string :scope
       t.datetime :created_at
     end
     add_index :slugs, :sluggable_id

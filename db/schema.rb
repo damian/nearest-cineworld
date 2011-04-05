@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20110404105351) do
     t.datetime "created_at"
   end
 
-  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
+  add_index "slugs", ["name", "sluggable_type", "sequence"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
 end

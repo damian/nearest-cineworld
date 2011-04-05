@@ -1,5 +1,7 @@
 defaults: &defaults
   cineworld_api_key: XXXXX
+  tmdb_api_key: XXXXX
+
 
 development:
   <<: *defaults
