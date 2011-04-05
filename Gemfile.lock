@@ -45,6 +45,9 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    hoptoad_notifier (2.4.9)
+      activesupport
+      builder
     httparty (0.6.1)
       crack (= 0.1.8)
     i18n (0.5.0)
@@ -91,6 +94,7 @@ DEPENDENCIES
   friendly_id (~> 3.2.1)
   geocoder
   haml-rails
+  hoptoad_notifier
   mysql2
   rails (= 3.0.5)
   settingslogic

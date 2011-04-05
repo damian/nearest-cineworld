@@ -22,6 +22,7 @@ namespace :cineworld do
   task :update_films => :environment do
     cineworld = Cineworld::API.new(Settings.cineworld_api_key)
     cineworld.films(:full => true)['films'].each do |film|
+
       Film.create do |f|
         f.edi = film['edi']
         f.title = film['title']
