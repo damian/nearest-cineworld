@@ -2,6 +2,7 @@
 %html.no-js
   %head
     = csrf_meta_tag
+    %link{:rel => "icon", :href => '/images/favicon.ico'}
     %title
       - if params[:action] == 'search'
         Finding cineworld cinemas and cineworld show times has never been easier
