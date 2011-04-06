@@ -273,6 +273,10 @@ ul {
   padding: 5px;
 }
 
+#change-location {
+  font-size: 0.4em;
+}
+
 .cast,
 .poster {
   float: left;

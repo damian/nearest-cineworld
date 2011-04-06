@@ -1,7 +1,13 @@
 = page_title("Cineworld #{@cinema.name} | #{@cinema.name} Cineworld")
 #cinema-address
   .grid_7.alpha
-    %h2{:data => { :href => cinema_path(@cinema), :latitude => @cinema.lat, :longitude => @cinema.lng } }= "Cineworld #{@cinema.name}"
+    %h2{:data => { :href => cinema_path(@cinema), :latitude => @cinema.lat, :longitude => @cinema.lng } }
+      = "Cineworld #{@cinema.name}"
+      #change-location
+        = link_to "change cinema", '#'
+        = form_tag(search_cinemas_path, :method => "get", :id => 'change-location-form', :class => 'hidden') do
+          = collection_select(:cinema, :cinema_id, Cinema.geocoded, :id, :name)
+
     %p= @cinema.to_address
   #map.grid_5.omega
   .clear

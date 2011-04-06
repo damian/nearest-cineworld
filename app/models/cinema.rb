@@ -29,7 +29,9 @@ class Cinema < ActiveRecord::Base
 
   # Geocoder gem
   geocoded_by :geocode_address, :latitude => :lat, :longitude => :lng
-  after_validation_on_create :geocode
+  after_validation(:on_create) do
+    :geocode
+  end
 
   # Scopes
   default_scope order('name asc')

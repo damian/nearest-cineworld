@@ -7,12 +7,15 @@ $(function() {
   body = $('body');
   body_id = body.attr('id');
 
-  if (body_id == 'cinemas-controller-search-action' && Modernizr.geolocation) {
+  if (body_id == 'cinemas-controller-search-action' && geo_position_js.init()) {
     spinner = $('#spinner'),
     loading_text = $('.loading');
     spinner.show();
-    navigator.geolocation.getCurrentPosition(success, error);
-  } else if (body_id == 'cinemas-controller-show-action') {
+    geo_position_js.getCurrentPosition(success, error);
+  }
+  
+  if (body_id == 'cinemas-controller-show-action') {
+    change_cinema();
     plot_map();
   }
 
@@ -34,13 +37,23 @@ function success(position) {
       var cinema_path = cinema_header.attr('data-href');
       var cinema_name = cinema_header.text();
       loading_text.hide();
-      if (Modernizr.history) {
-        history.pushState({ path: window.location.path }, '', cinema_path);
-      }
+      history.pushState({ path: window.location.path }, '', cinema_path);
       plot_map();
+      change_cinema();
     }
   });
 
+}
+
+function change_cinema() {
+  $('#change-location a').bind('click', function(e) {
+    e.preventDefault();
+    $(this).hide().next().fadeIn();
+  });
+
+  $('#cinema_cinema_id').bind('change', function(e) {
+    $(this).parent().submit();
+  });
 }
 
 function plot_map() {
@@ -66,7 +79,24 @@ function plot_map() {
   });
 }
 
-function error(position) {
-  alert('fail');
+function error(err) {
+  switch(err.code) {
+    case err.PERMISSION_DENIED:
+      alert("You gotsta share your location");
+    break;
+
+    case err.POSITION_UNAVAILABLE:
+      alert("Hmmm, cant find your position");
+    break;
+
+    case err.TIMEOUT:
+      alert("Timed out boyo");
+    break;
+
+    default:
+      alert("Ok summit else is wrong");
+    break;
+  }
+
 }
 
