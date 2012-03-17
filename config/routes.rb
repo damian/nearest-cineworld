@@ -1,6 +1,6 @@
 NearestCineworld::Application.routes.draw do
   resources :films, :only => [:show]
-  resources :cinemas, :only => [:show] do
+  resources :cinemas, :only => [:show, :index] do
     collection do
       get :search
     end

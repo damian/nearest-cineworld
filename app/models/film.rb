@@ -47,12 +47,11 @@ class Film < ActiveRecord::Base
 
   # Scopes
   default_scope order('title asc')
-  # Normally just group by films.edi, but heroku requires all attributes to be referenced
-  scope :grouped, group('films.edi, films.id, films.title, films.poster_url, films.film_url, films.still_url, films.advisory, films.classification, films.cached_slug, films.created_at, films.updated_at, films.imdb_id, films.tmdb_url, films.overview, films.posters, films.backdrops, films.release_date, films.popularity, films.votes, films.rating')
+  scope :grouped, group('films.edi')
   scope :performances_for_date, lambda { |date| where('performances.date = ?', date) }
   scope :today, performances_for_date(Date.today)
   scope :tomorrow, performances_for_date(Date.today + 1)
-  scope :for_today, today.grouped
+  scope :for_today, today
   scope :for_tomorrow, tomorrow.grouped
 
   # Callbacks

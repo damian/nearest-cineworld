@@ -21,7 +21,7 @@ class Cinema < ActiveRecord::Base
 
   # Relationships
   has_many :performances
-  has_many :films, :through => :performances
+  has_many :films, :through => :performances, :uniq => true
   has_friendly_id :name, :use_slug => true
 
   # Validations

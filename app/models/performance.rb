@@ -25,10 +25,23 @@ class Performance < ActiveRecord::Base
   validates_uniqueness_of :booking_url
 
   # Scopes
-  scope :for_cinema, lambda { |cinema| where('cinema_id = ?', cinema.id) }
+  scope :for_cinema, lambda { |cinema| where('cinema_id = ?', cinema) }
   scope :for_date, lambda { |date| where('date = ?', date) }
   scope :today, for_date(Date.today)
   scope :tomorrow, for_date(Date.today + 1)
+
+  def in_the_past?
+    now = Time.now
+    Time.zone.local(now.year, now.month, now.day, hours, minutes, 0).past?
+  end
+
+  def hours
+    @hours ||= time.split(':')[0]
+  end
+
+  def minutes
+    @minutes ||= time.split(':')[1]
+  end
 
 end
 

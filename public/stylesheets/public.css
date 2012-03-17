@@ -286,8 +286,15 @@ ul {
   background-color: white;
 }
 
-.cast { float: none; }
-#cast li { margin-bottom: 20px; }
+.cast {
+  float: none;
+  width: 100px;
+}
+
+#cast li {
+  margin-bottom: 20px;
+  list-style: none;
+}
 
 .cinema {
   padding: 10px 0;
@@ -412,4 +419,20 @@ br {
 .unavailable {
   background-color: #EEE;
   color: #999;
+}
+
+/* For modern browsers */
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    zoom:1;
 }

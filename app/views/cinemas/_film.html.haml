@@ -7,10 +7,7 @@
         %h3= link_to film.title, film_path(film), :class => 'film-title'
 
         %h4 Today
-        %p.performances= list_performances(film.performances.for_cinema(@cinema).today)
-
-        %h4 Tomorrow
-        %p.performances= list_performances(film.performances.for_cinema(@cinema).tomorrow, false)
+        %p.performances= list_todays_performances(film, @cinema.id)
     .clear
 - if ((film_counter + 1) % 4 == 0)
   %li.clear

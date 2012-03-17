@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110404105351) do
+ActiveRecord::Schema.define(:version => 20120317214321) do
 
   create_table "cinemas", :force => true do |t|
     t.integer  "cinema_id"
@@ -72,13 +72,17 @@ ActiveRecord::Schema.define(:version => 20110404105351) do
     t.datetime "updated_at"
   end
 
+  add_index "performances", ["cinema_id"], :name => "index_performances_on_cinema_id"
+  add_index "performances", ["date"], :name => "index_performances_on_date"
+  add_index "performances", ["film_id"], :name => "index_performances_on_film_id"
+
   create_table "slugs", :force => true do |t|
     t.string   "name"
     t.integer  "sluggable_id"
     t.integer  "sequence",                     :default => 1, :null => false
     t.string   "sluggable_type", :limit => 40
-    t.string   "scope"
     t.datetime "created_at"
+    t.string   "scope"
   end
 
   add_index "slugs", ["name", "sluggable_type", "sequence"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
