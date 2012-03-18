@@ -10,3 +10,7 @@ gem 'settingslogic'
 gem 'tmdb_party'
 gem 'hoptoad_notifier'
 gem 'newrelic_rpm'
+
+group :development do
+  gem 'capistrano'
+end

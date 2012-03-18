@@ -25,8 +25,8 @@ class Performance < ActiveRecord::Base
   validates_uniqueness_of :booking_url
 
   # Scopes
-  scope :for_cinema, lambda { |cinema| where('cinema_id = ?', cinema) }
-  scope :for_date, lambda { |date| where('date = ?', date) }
+  scope :for_cinema, lambda { |cinema| select('time, booking_url').where('`performances`.cinema_id = ?', cinema) }
+  scope :for_date, lambda { |date| where('`performances`.date = ?', "#{date} 00:00:00") }
   scope :today, for_date(Date.today)
   scope :tomorrow, for_date(Date.today + 1)
 

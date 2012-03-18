@@ -22,7 +22,6 @@ namespace :cineworld do
   task :update_films => :environment do
     cineworld = Cineworld::API.new(Settings.cineworld_api_key)
     cineworld.films(:full => true)['films'].each do |film|
-
       Film.create do |f|
         f.edi = film['edi']
         f.title = film['title']
@@ -42,11 +41,12 @@ namespace :cineworld do
     today = date.strftime('%Y%m%d')
     tomorrow = (date + 1).strftime('%Y%m%d')
     cineworld = Cineworld::API.new(Settings.cineworld_api_key)
-    Film.all.each do |film|
-      Cinema.all.each do |cinema|
-        [tomorrow].each do |date|
-          cineworld.performances(:date => date, :cinema => cinema.id, :film => film.edi)['performances'].each do |performance|
-            Performance.create(:time => performance['time'], :available => performance['available'], :performance_type => performance['type'], :ad => performance['ad'], :subtitled => performance['subtitled'], :booking_url => performance['booking_url'], :cinema_id => cinema.id, :film_id => film.edi, :date => date)
+    Cinema.all.each do |cinema|
+      Film.all.each do |film|
+        cineworld.performances(:date => today, :cinema => cinema.id, :film => film.edi)['performances'].each do |performance|
+          performance = Performance.new(:time => performance['time'], :available => performance['available'], :performance_type => performance['type'], :ad => performance['ad'], :subtitled => performance['subtitled'], :booking_url => performance['booking_url'], :cinema_id => cinema.id, :film_id => film.edi, :date => today)
+          if peformance.save
+            puts "#{performance.time} showing for #{film.title} @ #{cinema.name}"
           end
         end
       end
