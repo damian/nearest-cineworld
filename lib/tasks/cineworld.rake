@@ -44,10 +44,8 @@ namespace :cineworld do
     Cinema.all.each do |cinema|
       Film.all.each do |film|
         cineworld.performances(:date => today, :cinema => cinema.id, :film => film.edi)['performances'].each do |performance|
-          performance = Performance.new(:time => performance['time'], :available => performance['available'], :performance_type => performance['type'], :ad => performance['ad'], :subtitled => performance['subtitled'], :booking_url => performance['booking_url'], :cinema_id => cinema.id, :film_id => film.edi, :date => today)
-          if peformance.save
-            puts "#{performance.time} showing for #{film.title} @ #{cinema.name}"
-          end
+          @performance = Performance.create(:time => performance['time'], :available => performance['available'], :performance_type => performance['type'], :ad => performance['ad'], :subtitled => performance['subtitled'], :booking_url => performance['booking_url'], :cinema_id => cinema.id, :film_id => film.edi, :date => today)
+          puts "#{@performance.time} showing for #{film.title} @ #{cinema.name}"
         end
       end
     end
